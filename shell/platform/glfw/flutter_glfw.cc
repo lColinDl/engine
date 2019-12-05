@@ -555,13 +555,25 @@ FlutterDesktopWindowControllerRef FlutterDesktopCreateWindow(
     const FlutterDesktopEngineProperties& engine_properties) {
   auto state = std::make_unique<FlutterDesktopWindowControllerState>();
 
+  int width, height;
+  GLFWmonitor* monitor;
+  if (window_properties.fullscreen) {
+      monitor = glfwGetPrimaryMonitor();
+      auto video_mode = glfwGetVideoMode(monitor);
+      width = video_mode->width;
+      height = video_mode->height;
+  } else {
+      width = window_properties.width;
+      height = window_properties.height;
+      monitor = nullptr;
+  }
+
   // Create the window, and set the state as its user data.
   if (window_properties.prevent_resize) {
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
   }
   state->window = UniqueGLFWwindowPtr(
-      glfwCreateWindow(window_properties.width, window_properties.height,
-                       window_properties.title, NULL, NULL),
+      glfwCreateWindow(width, height, title, monitor, NULL),
       glfwDestroyWindow);
   glfwDefaultWindowHints();
   GLFWwindow* window = state->window.get();

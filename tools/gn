@@ -247,9 +247,9 @@ def to_gn_args(args):
       gn_args['dart_platform_sdk'] = not args.full_dart_sdk
     gn_args['full_dart_sdk'] = args.full_dart_sdk
 
-    if sys.platform == 'darwin':
-      if args.build_glfw_shell:
-        gn_args['build_glfw_shell'] = True
+    #if sys.platform == 'darwin':
+    if args.build_glfw_shell:
+      gn_args['build_glfw_shell'] = True
 
     gn_args['stripped_symbols'] = args.stripped
 
@@ -371,6 +371,9 @@ def main(argv):
     command.append('--ide=vs')
 
   gn_args = to_command_line(to_gn_args(args))
+
+  print "Args: %s" % gn_args
+
   out_dir = get_out_dir(args)
   command.append(out_dir)
   command.append('--args=%s' % ' '.join(gn_args))

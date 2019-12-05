@@ -29,6 +29,9 @@ struct WindowProperties {
   // Whether or not the user is prevented from resizing the window.
   // Reversed so that the default for a cleared struct is to allow resizing.
   bool prevent_resize;
+
+  // Whether the window should be fullscreen
+  bool fullscreen;
 };
 
 // A controller for a window displaying Flutter content.
