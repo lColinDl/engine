@@ -44,6 +44,7 @@ bool FlutterWindowController::CreateWindow(
   c_window_properties.width = window_properties.width;
   c_window_properties.height = window_properties.height;
   c_window_properties.prevent_resize = window_properties.prevent_resize;
+  c_window_properties.fullscreen = window_properties.fullscreen;
 
   FlutterDesktopEngineProperties c_engine_properties = {};
   c_engine_properties.assets_path = assets_path.c_str();
